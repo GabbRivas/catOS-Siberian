@@ -14,6 +14,8 @@
 
 // Data Types
 
+typedef void                VOID;
+
 // UINT
 typedef unsigned char       UINT8;
 typedef unsigned short      UINT16;
@@ -73,6 +75,8 @@ typedef void*               EFI_EVENT;
 typedef UINT64              EFI_STATUS;
 typedef UINT64              EFI_LBA;
 typedef UINTN               EFI_TPL;
+typedef UINT64              EFI_PHYSICAL_ADDRESS;
+typedef UINT64              EFI_VIRTUAL_ADDRESS;
 
 // Parameter modifiers
 #define IN
