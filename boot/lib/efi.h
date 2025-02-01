@@ -7,7 +7,11 @@
 #ifndef EFI_H
 #define EFI_H
 
-#include "headers/key/efi_data_types.h"
-#include "headers/key/efi_declarations.h"
+#include "headers/efi_core.h"
+#include "headers/efi_load_option.h"
+#include "headers/efi_boot_key_data.h"
+#include "headers/efi_key_option.h"
+#include "headers/efi_device_path_protocol.h"
+#include "headers/efi_boot_policy_protocol.h"
 
 #endif
