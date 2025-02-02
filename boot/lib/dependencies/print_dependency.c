@@ -3,7 +3,6 @@
 //
 
 #include "print_dependency.h"
-#include "pool_dependency.h"
 
 // Format utilities
 
@@ -37,7 +36,7 @@ static void UintDec(UINT64 Value, CHAR16*Buffer){
     }
 }
 
-static void ProcessSpecifier(CHAR16 Specifier,VA_LIST *Args,CHAR16 **Pointer,CHAR16 *BufferEnd) {
+static void ProcessSpecifier(CHAR16 Specifier,VA_LIST *Args,CHAR16 **Pointer, CONST CHAR16 *BufferEnd) {
     switch (Specifier) {
     case L's': { //String
         CHAR16 *String = VA_ARG(*Args, CHAR16*);

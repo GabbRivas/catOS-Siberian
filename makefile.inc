@@ -1,1 +1,4 @@
-USB_DIRECTION=/dev/sda1
+ARCH=x86_64
+OSNAME=catOS_Siberian
+
+ACTUAL_BUILD_DIR=build/$(ARCH)

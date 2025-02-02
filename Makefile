@@ -1,12 +1,44 @@
-#Central makefile
+# Root Makefile
+include makefile.inc
 
-USB_DIRECTION=/dev/sda1
-OVMFDIR=tools/ovmf
+OVMFDIR = tools/ovmf
+IMGSIZE = 64M  # 64MB FAT32 image
 
-.PHONY:qemu
+.PHONY: all buildImg qemu clean
 
-qemu_4m:
-	sudo qemu-system-x86_64 -drive file=$(USB_DIRECTION) -m 256M -cpu qemu64 -drive if=pflash,format=raw,unit=0,file="$(OVMFDIR)/OVMF_CODE.4m.fd",readonly=on -drive if=pflash,format=raw,unit=1,file="$(OVMFDIR)/OVMF_VARS.4m.fd" -net none
+all: buildImg
 
-qemu:
-	sudo qemu-system-x86_64 -drive file=$(USB_DIRECTION) -m 256M -cpu qemu64 -drive if=pflash,format=raw,unit=0,file="$(OVMFDIR)/OVMF_CODE-pure-efi.fd",readonly=on -drive if=pflash,format=raw,unit=1,file="$(OVMFDIR)/OVMF_VARS-pure-efi.fd" -net none
+buildImg: build
+	@echo "Creating bootable disk image..."
+	@dd if=/dev/zero of=iso/$(OSNAME).img bs=$(IMGSIZE) count=1
+	@mkfs.fat -F 32 iso/$(OSNAME).img
+	@mmd -i iso/$(OSNAME).img ::/EFI ::/EFI/BOOT
+	@mcopy -i iso/$(OSNAME).img -s $(ACTUAL_BUILD_DIR)/EFI/BOOT/* ::/EFI/BOOT/
+	@echo "Disk image created at iso/$(OSNAME).img"
+
+qemu: buildImg
+ifeq ($(ARCH),x86_64)
+	@echo "Starting QEMU for x86_64..."
+	@qemu-system-x86_64 \
+		-drive if=pflash,format=raw,readonly=on,file=$(OVMFDIR)/OVMF_CODE.4m.fd \
+		-drive if=pflash,format=raw,file=$(OVMFDIR)/OVMF_VARS.4m.fd \
+		-drive file=iso/$(OSNAME).img,format=raw,media=disk \
+		-net none \
+		-serial mon:stdio
+else ifeq ($(ARCH),aarch64)
+	@echo "Starting QEMU for AArch64..."
+	@qemu-system-aarch64 \
+		-machine virt \
+		-cpu cortex-a72 \
+		-drive if=pflash,format=raw,file=$(OVMFDIR)/OVMF_CODE.4m.fd \
+		-drive file=iso/$(OSNAME).img,format=raw,media=disk \
+		-net none \
+		-serial mon:stdio
+else
+	$(error Unsupported architecture for QEMU: $(ARCH))
+endif
+
+clean:
+	@rm -rf iso/$(OSNAME).img
+	@rm -rf $(ACTUAL_BUILD_DIR)
+	@echo "Cleaned build artifacts and disk image"

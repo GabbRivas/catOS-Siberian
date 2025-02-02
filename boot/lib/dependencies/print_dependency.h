@@ -9,11 +9,12 @@
 #define PRINT_DEPENDENCY_H
 
 #include "../efi.h"
+#include "pool_dependency.h"
 
-#define VA_LIST         void*
+#define VA_LIST         VOID*
 #define VA_START(Args)  (Args = (VA_LIST)((UINT8*)&Format + sizeof(Format)))
 #define VA_ARG(Args, T) (*(T*)((Args = (UINT8*)Args + sizeof(T)) - sizeof(T)))
-#define VA_END(Args)    ((void)Args)
+#define VA_END(Args)    ((VOID)Args)
 
 void Output(EFI_SYSTEM_TABLE *SysTab, const CHAR16 *Format, ...);
 
