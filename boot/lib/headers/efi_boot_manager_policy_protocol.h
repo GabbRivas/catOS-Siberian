@@ -4,8 +4,8 @@
  * EFI Boot Manager Policy Protocol
  */
 
-#ifndef EFI_BOOT_POLICY_PROTOCOL_H
-#define EFI_BOOT_POLICY_PROTOCOL_H
+#ifndef EFI_BOOT_MANAGER_POLICY_PROTOCOL_H
+#define EFI_BOOT_MANAGER_POLICY_PROTOCOL_H
 
 #include "efi_core.h"
 #include "efi_device_path_protocol.h"
@@ -19,13 +19,13 @@
     { 0x99, 0x03, 0xB8, 0xE8, 0x56, 0x2C, 0xBA, 0xFA } }
 
 // Forward declaration of the protocol structure
-typedef struct _EFI_BOOT_POLICY_PROTOCOL EFI_BOOT_MANAGER_POLICY_PROTOCOL;
+typedef struct _EFI_BOOT_MANAGER_POLICY_PROTOCOL EFI_BOOT_MANAGER_POLICY_PROTOCOL;
 
 // Function pointer types
 typedef EFI_STATUS(EFIAPI *EFI_BOOT_MANAGER_POLICY_CONNECT_DEVICE_PATH)(
     IN EFI_BOOT_MANAGER_POLICY_PROTOCOL *This,
     IN EFI_DEVICE_PATH_PROTOCOL         *DevicePath,
-    IN BOOLEAN                          Recursive
+    IN BOOLEAN                           Recursive
 );
 
 typedef EFI_STATUS(EFIAPI *EFI_BOOT_MANAGER_POLICY_CONNECT_DEVICE_CLASS)(
@@ -34,7 +34,7 @@ typedef EFI_STATUS(EFIAPI *EFI_BOOT_MANAGER_POLICY_CONNECT_DEVICE_CLASS)(
 );
 
 // Protocol Structure
-struct _EFI_BOOT_POLICY_PROTOCOL {
+struct _EFI_BOOT_MANAGER_POLICY_PROTOCOL {
     UINT64                                         Revision;
     EFI_BOOT_MANAGER_POLICY_CONNECT_DEVICE_PATH    ConnectDevicePath;
     EFI_BOOT_MANAGER_POLICY_CONNECT_DEVICE_CLASS   ConnectDeviceClass;
