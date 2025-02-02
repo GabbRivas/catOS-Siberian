@@ -1,0 +1,1 @@
+USB_DIRECTION=/dev/sda1
