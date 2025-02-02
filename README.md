@@ -14,6 +14,6 @@ sudo pacman -S clang
 [lld-link](https://lld.llvm.org/) for linking binaries:
 ```bash
 sudo pacman -S lld-link
-'''
+```
 
 ## Project Division
