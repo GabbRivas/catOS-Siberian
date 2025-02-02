@@ -108,6 +108,7 @@ typedef struct {
 typedef UINT8 BOOLEAN;
 #define TRUE  1
 #define FALSE 0
+#define NULL  ((VOID*)0)
 
 typedef UINT64 EFI_PHYSICAL_ADDRESS;
 typedef UINT64 EFI_VIRTUAL_ADDRESS;

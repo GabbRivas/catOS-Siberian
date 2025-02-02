@@ -48,4 +48,6 @@
 #include "headers/services/efi_boot_services.h"
 #include "headers/services/efi_system_table.h"
 
+#define EFI_ERROR_HANDLER L" [SPHYNX ERROR HANDLER] Boot Loader: "
+
 #endif

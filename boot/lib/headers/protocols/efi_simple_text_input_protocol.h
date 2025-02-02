@@ -24,4 +24,10 @@ typedef EFI_STATUS(EFIAPI *EFI_INPUT_READ_KEY)(
     OUT EFI_INPUT_KEY                       *Key
 );
 
+struct _EFI_SIMPLE_TEXT_INPUT_PROTOCOL{
+    EFI_INPUT_RESET                 Reset;
+    EFI_INPUT_READ_KEY              ReadKeyStroke;
+    EFI_EVENT                       WaitForKey;
+};
+
 #endif

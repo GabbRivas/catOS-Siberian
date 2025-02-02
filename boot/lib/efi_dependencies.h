@@ -7,4 +7,6 @@
 #ifdef EFI_DEPENDENCIES_H
 #define EFI_DEPENDENCIES_H
 
+#include "dependencies/pool_dependency.h"
+
 #endif
