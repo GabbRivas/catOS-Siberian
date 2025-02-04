@@ -113,7 +113,7 @@ typedef UINT8 BOOLEAN;
 typedef UINT64 EFI_PHYSICAL_ADDRESS;
 typedef UINT64 EFI_VIRTUAL_ADDRESS;
 
-#define EFI_ERROR(code) ((EFI_STATUS)(code) < 0)
+#define EFI_ERROR(code) ((code) > 0)
 #define EFI_SUCCESS     0
 #define EFI_LOAD_ERROR  0x80000001
 #define EFI_INVALID_KEY 0x80000002

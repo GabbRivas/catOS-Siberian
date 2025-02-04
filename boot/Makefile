@@ -15,6 +15,8 @@ endif
 BOOT_BUILD_DIR   = $(ACTUAL_BUILD_DIR)/boot
 ROOT_OUTPUT_DIR  = ../$(ACTUAL_BUILD_DIR)
 EFI_OUTPUT_DIR   = $(ROOT_OUTPUT_DIR)/EFI/BOOT
+CONFIGURATION_OUTPUT_DIR   = $(ROOT_OUTPUT_DIR)/BOOT
+COMPLEMENTARY_DEPENDENCIES = /complementary
 
 LIB_SRCS         = $(wildcard lib/dependencies/*.c)
 APP_SRCS         = $(wildcard app/*.c)
@@ -39,9 +41,8 @@ LDFLAGS         = -subsystem:efi_application \
                   -nodefaultlib \
                   -entry:$(ENTRY_POINT) \
                   -lldmingw \
-                  -dll
 
-all: setup efi
+all: setup complementary efi
 
 efi: $(EFI_OUTPUT_DIR)/$(EFI_OUTPUT_NAME)
 
@@ -49,6 +50,9 @@ setup:
 	@mkdir -p $(BOOT_BUILD_DIR)/lib/dependencies
 	@mkdir -p $(BOOT_BUILD_DIR)/app
 	@mkdir -p $(EFI_OUTPUT_DIR)
+	@mkdir -p $(CONFIGURATION_OUTPUT_DIR)
+
+external:
 
 $(BOOT_BUILD_DIR)/%.o: %.c
 	@echo "Compiling $<"

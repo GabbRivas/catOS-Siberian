@@ -9,9 +9,9 @@
 #define POOL_DEPENDENCY_H
 
 #include "../efi.h"
+#include "global_dependency.h"
 
-void *AllocatePool(EFI_SYSTEM_TABLE *SysTab, UINTN Size);
-
-void FreePool(EFI_SYSTEM_TABLE *SysTab, void *Buffer);
+EFI_STATUS AllocatePool(UINTN Size, VOID **Buffer);
+VOID FreePool(VOID *Buffer);
 
 #endif

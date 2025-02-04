@@ -7,7 +7,9 @@
 #ifndef EFI_DEPENDENCIES_H
 #define EFI_DEPENDENCIES_H
 
+#include "dependencies/global_dependency.h"
 #include "dependencies/pool_dependency.h"
 #include "dependencies/print_dependency.h"
+#include "dependencies/file_dependency.h"
 
 #endif

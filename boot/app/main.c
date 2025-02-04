@@ -5,14 +5,36 @@
 #include "../lib/efi.h"
 #include "../lib/efi_dependencies.h"
 
+#define BOOT_CONFIG_PATH    L"\\BOOT\\boot.config"
+#define MAX_PATH_LEN 128
+
+typedef struct {
+    CHAR16 SecondStage;
+    CHAR16 FallbackStage;
+    UINTN  TriggerSelection;
+} BOOT_CONFIG;
+
 EFI_STATUS efiApi(IN EFI_HANDLE ImgHdl, IN EFI_SYSTEM_TABLE *SysTab){
-    (void)ImgHdl;
+    InitApplicationServices(SysTab);
 
-    Output(SysTab, L"[Boot Manager] EFI app Loaded.");
+    Sys->ConsoleOutput->ClearScreen(Sys->ConsoleOutput); //Debug purposes for clarity
 
-    Output(SysTab, L"");
+    EFI_FILE_PROTOCOL   *Root;
+    EFI_STATUS Status=FileOpenRoot(&Root);
+    if(EFI_ERROR(Status)){
+        Print(L"Unable to open root volume, check volume integrity.\n\r");
+    }
 
-    while(1); //Infinite loop to debug
+    EFI_FILE_PROTOCOL   *File;
+    Status=FileOpen(Root, BOOT_CONFIG_PATH, &File);
+    if(EFI_ERROR(Status)){
+        Print(L"%s\n\r",EFI_ERROR_HANDLER);
+        Print(L"   Unable to retrieve %s\n\r",BOOT_CONFIG_PATH);
+        Print(L"   Check file integrity, volume integrity and file existance.\n\r");
+    }
 
+
+
+    while(1); //Debug purposes loop;
     return 0;
 }

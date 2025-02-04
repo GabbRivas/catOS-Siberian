@@ -47,7 +47,13 @@
 #include "headers/protocols/efi_open_protocol_information_entry.h"
 #include "headers/services/efi_boot_services.h"
 #include "headers/services/efi_system_table.h"
+#include "headers/protocols/efi_file_protocol.h"
+#include "headers/file/efi_file_io_token.h"
+#include "headers/file/efi_file_info.h"
+#include "headers/file/efi_file_system_info.h"
+#include "headers/file/efi_file_system_volume_label.h"
+#include "headers/protocols/efi_simple_file_system_protocol.h"
 
-#define EFI_ERROR_HANDLER L" [SPHYNX ERROR HANDLER] Boot Loader: "
+#define EFI_ERROR_HANDLER L" [ SPHYNX ERROR HANDLER ] { Boot Loader Stage } Error: "
 
 #endif

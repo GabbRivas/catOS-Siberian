@@ -1,23 +1,25 @@
 //
 // Made by Gab Rivas 02/02/25 11:56
 //
-// Print library that includes function for
+// Print library that includes functions for
 // formatted printing.
 //
 
 #ifndef PRINT_DEPENDENCY_H
 #define PRINT_DEPENDENCY_H
 
+#define PRINT_BUFFER_SIZE   512
+#define MAX_NUMBER_LENGTH   64
+
 #include "../efi.h"
-#include "pool_dependency.h"
+#include "stdarg_efi_dependency.h"
+#include "global_dependency.h"
 
-#define VA_LIST         VOID*
-#define VA_START(Args)  (Args = (VA_LIST)((UINT8*)&Format + sizeof(Format)))
-#define VA_ARG(Args, T) (*(T*)((Args = (UINT8*)Args + sizeof(T)) - sizeof(T)))
-#define VA_END(Args)    ((VOID)Args)
+// Helper Functions
+// static VOID AddChar(CHAR16 **Pointer, CONST CHAR16 *End, CHAR16 c);
+// static VOID AddString(CHAR16 **Pointer, CONST CHAR16 *End, CONST CHAR16 *Str);
+// static VOID AddNumber(CHAR16 **Pointer, CONST CHAR16 *End, UINT64 Number, UINTN Base);
 
-void Output(EFI_SYSTEM_TABLE *SysTab, const CHAR16 *Format, ...);
-
-[[noreturn]] void HaltSystem(EFI_SYSTEM_TABLE *SysTab, const CHAR16 *Format,...);
+VOID Print(IN CONST CHAR16 *Format, ...);
 
 #endif

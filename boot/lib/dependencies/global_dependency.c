@@ -1,0 +1,23 @@
+//
+// Made by Gab Rivas 03/02/25 15:40
+//
+
+#include "global_dependency.h"
+
+EFI_SYSTEM_TABLE *Sys = NULL;
+EFI_BOOT_SERVICES *Bsvc = NULL;
+EFI_RUNTIME_SERVICES *Rsvc = NULL;
+
+EFI_GUID efiBootManagerPolicyProtocolGUID=EFI_BOOT_MANAGER_POLICY_PROTOCOL_GUID;
+EFI_GUID EfiDevicePathProtocolGUID=EFI_DEVICE_PATH_PROTOCOL_GUID;
+EFI_GUID EfiSimpleFileSystemProtocolGUID=EFI_SIMPLE_FILE_SYSTEM_PROTOCOL_GUID;
+EFI_GUID EfiSimpleTextInputExProtocolGUID=EFI_SIMPLE_TEXT_INPUT_EX_PROTOCOL_GUID;
+EFI_GUID EfiSimpleTextInputProtocolGUID=EFI_SIMPLE_TEXT_INPUT_PROTOCOL_GUID;
+EFI_GUID EfiSimpleTextOutputProtocolGUID=EFI_SIMPLE_TEXT_OUTPUT_PROTOCOL_GUID;
+EFI_GUID EfiFileInfoID=EFI_FILE_INFO_ID;
+
+VOID InitApplicationServices(EFI_SYSTEM_TABLE *SysTab){
+    Sys=SysTab;
+    Bsvc=Sys->BootServices;
+    Rsvc=Sys->RuntimeServices;
+}

@@ -12,8 +12,7 @@ buildImg: build
 	@echo "Creating bootable disk image..."
 	@dd if=/dev/zero of=iso/$(OSNAME).img bs=$(IMGSIZE) count=1
 	@mkfs.fat -F 32 iso/$(OSNAME).img
-	@mmd -i iso/$(OSNAME).img ::/EFI ::/EFI/BOOT
-	@mcopy -i iso/$(OSNAME).img -s $(ACTUAL_BUILD_DIR)/EFI/BOOT/* ::/EFI/BOOT/
+	@mcopy -i iso/$(OSNAME).img -s $(ACTUAL_BUILD_DIR)/* ::
 	@echo "Disk image created at iso/$(OSNAME).img"
 
 qemu: buildImg
@@ -40,5 +39,4 @@ endif
 
 clean:
 	@rm -rf iso/$(OSNAME).img
-	@rm -rf $(ACTUAL_BUILD_DIR)
 	@echo "Cleaned build artifacts and disk image"
