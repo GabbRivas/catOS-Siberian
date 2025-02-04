@@ -52,7 +52,9 @@ setup:
 	@mkdir -p $(EFI_OUTPUT_DIR)
 	@mkdir -p $(CONFIGURATION_OUTPUT_DIR)
 
-external:
+complementary:
+	@echo "Copying complementary resources"
+	@mcopy -i $(CONFIGURATION_OUTPUT_DIR)/ -s $(COMPLEMENTARY_DEPENDENCIES)/boot.config ::
 
 $(BOOT_BUILD_DIR)/%.o: %.c
 	@echo "Compiling $<"

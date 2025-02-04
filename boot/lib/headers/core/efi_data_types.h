@@ -115,8 +115,6 @@ typedef UINT64 EFI_VIRTUAL_ADDRESS;
 
 #define EFI_ERROR(code) ((code) > 0)
 #define EFI_SUCCESS     0
-#define EFI_LOAD_ERROR  0x80000001
-#define EFI_INVALID_KEY 0x80000002
 
 // Compile-time size validation
 _Static_assert(sizeof(INT8) == 1, "INT8 size mismatch");

@@ -20,16 +20,22 @@ EFI_STATUS FileOpen(EFI_FILE_PROTOCOL *Directory, CHAR16 *Path, EFI_FILE_PROTOCO
 
 EFI_STATUS FileGetSize(EFI_FILE_PROTOCOL *File, UINTN *Size){
     EFI_FILE_INFO   *Info;
-    UINTN InfoSize=0;
+    UINTN           InfoSize=0;
 
     EFI_STATUS Status=File->GetInfo(File,&EfiFileInfoID,&InfoSize,NULL);
-    if(Status!=EFI_BUFFER_TOO_SMALL) return Status;
+    if(Status!=EFI_BUFFER_TOO_SMALL){
+        Print(L"File GetInfo: Expected EFI_BUFFER_TOO_SMALL (%x) got: %x\r\n",EFI_BUFFER_TOO_SMALL,Status);
+        return Status;
+    };
 
     Status=AllocatePool(InfoSize, (VOID**)&Info);
-    if(EFI_ERROR(Status)) return Status;
+    if(EFI_ERROR(Status)) {
+        return Status;
+    }
 
     Status=File->GetInfo(File, &EfiFileInfoID, &InfoSize, Info);
     if(EFI_ERROR(Status)){
+        Print(L"Couldn't retrieve\n\r");
         FreePool(Info);
         return Status;
     }

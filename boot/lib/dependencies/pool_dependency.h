@@ -12,6 +12,6 @@
 #include "global_dependency.h"
 
 EFI_STATUS AllocatePool(UINTN Size, VOID **Buffer);
-VOID FreePool(VOID *Buffer);
+EFI_STATUS FreePool(VOID *Buffer);
 
 #endif

@@ -8,8 +8,9 @@ EFI_STATUS AllocatePool(UINTN Size, VOID **Buffer){
     return Bsvc->AllocatePool(EfiLoaderData,Size,Buffer);
 }
 
-VOID FreePool(VOID *Buffer){
+EFI_STATUS FreePool(VOID *Buffer){
     if(Buffer){
-        Bsvc->FreePool(Buffer);
+        return Bsvc->FreePool(Buffer);
     }
+    return EFI_UNSUPPORTED;
 }
