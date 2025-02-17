@@ -1,13 +1,13 @@
 include ../makefile.inc
 
+ENTRY_POINT     = efiAPI
+
 ifeq ($(ARCH),x86_64)
     TARGET          = x86_64-pc-win32-coff
     EFI_OUTPUT_NAME = BOOTX64.EFI
-    ENTRY_POINT     = efiApi
 else ifeq ($(ARCH),aarch64)
     TARGET          = aarch64-pc-win32-coff
     EFI_OUTPUT_NAME = BOOTAA64.EFI
-    ENTRY_POINT     = efiApi
 else
     $(error Unsupported architecture: $(ARCH))
 endif

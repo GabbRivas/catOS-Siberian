@@ -13,7 +13,9 @@ typedef struct {
     UINTN  TriggerSelection;
 } BOOT_CONFIG;
 
-EFI_STATUS efiApi(EFI_SYSTEM_TABLE *SysTab, EFI_HANDLE ImageHandle){
+EFI_STATUS efiAPI(EFI_SYSTEM_TABLE *SysTab, EFI_HANDLE ImageHandle){
+
+    InitApplicationServices(SysTab);
 
     while (1); //Debug purposes
     return 0;
